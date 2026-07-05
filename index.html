@@ -183,38 +183,69 @@ canvas{display:block;image-rendering:pixelated;touch-action:none;}
 #touch-controls.hidden{display:none;}
 #touch-controls .tc-zone{
   position:absolute;bottom:0;display:flex;
-  padding:14px;gap:10px;pointer-events:none;
+  padding:18px;pointer-events:none;
 }
 #touch-controls .tc-left{left:0;align-items:flex-end;}
-#touch-controls .tc-right{right:0;align-items:flex-end;}
+#touch-controls .tc-right{right:0;align-items:flex-end;flex-direction:column;}
 .tc-btn{
   pointer-events:auto;touch-action:none;
-  background:rgba(26,26,58,0.65);
-  border:2px solid rgba(58,58,255,0.8);
+  background:rgba(26,26,58,0.68);
+  border:3px solid rgba(58,58,255,0.85);
   color:#fff;font-family:'Press Start 2P',monospace;
   display:flex;align-items:center;justify-content:center;
-  border-radius:6px;
-  box-shadow:0 0 8px rgba(51,51,255,0.35);
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(51,51,255,0.4);
 }
 .tc-btn:active,.tc-btn.tc-active{
-  background:rgba(58,58,255,0.55);
+  background:rgba(58,58,255,0.6);
   border-color:var(--gold);
-  box-shadow:0 0 12px var(--gold);
+  box-shadow:0 0 16px var(--gold);
 }
+
+/* Classic 4-way D-pad, cross shaped */
 .tc-dpad{
-  position:relative;width:150px;height:150px;
+  position:relative;width:246px;height:246px;
 }
 .tc-dpad .tc-btn{
-  position:absolute;width:50px;height:50px;font-size:14px;
+  position:absolute;width:82px;height:82px;font-size:22px;
 }
-.tc-dpad .tc-left-btn{ left:0;   top:50px;  border-radius:8px 4px 4px 8px;}
-.tc-dpad .tc-right-btn{ left:100px;top:50px; border-radius:4px 8px 8px 4px;}
-.tc-dpad .tc-up-btn{   left:50px; top:0;    border-radius:8px 8px 4px 4px;}
-.tc-actions{
-  display:grid;grid-template-columns:repeat(2,60px);grid-template-rows:repeat(2,60px);gap:8px;
+.tc-dpad .tc-up-btn{    left:82px; top:0;   border-radius:10px 10px 3px 3px;}
+.tc-dpad .tc-down-btn{  left:82px; top:164px;border-radius:3px 3px 10px 10px;}
+.tc-dpad .tc-left-btn{  left:0;    top:82px; border-radius:10px 3px 3px 10px;}
+.tc-dpad .tc-right-btn{ left:164px;top:82px; border-radius:3px 10px 10px 3px;}
+.tc-dpad .tc-center-deco{
+  position:absolute;left:82px;top:82px;width:82px;height:82px;
+  border-radius:50%;background:rgba(10,10,26,0.5);border:2px solid rgba(58,58,255,0.5);
+  pointer-events:none;
 }
-.tc-actions .tc-btn{font-size:6px;flex-direction:column;gap:2px;border-radius:50%;}
-.tc-actions .tc-btn .tc-key{font-size:4px;opacity:0.65;}
+
+/* Diamond of face buttons: JMP top, BLK left, ATK right, SPC bottom */
+.tc-diamond{
+  display:grid;
+  grid-template-columns:repeat(3,84px);
+  grid-template-rows:repeat(3,84px);
+  gap:0;
+}
+.tc-diamond .tc-btn{
+  border-radius:50%;font-size:11px;flex-direction:column;gap:3px;
+}
+.tc-diamond .tc-btn .tc-key{font-size:5px;opacity:0.65;}
+.tc-jmp-btn{grid-column:2;grid-row:1;}
+.tc-blk-btn{grid-column:1;grid-row:2;}
+.tc-atk-btn{grid-column:3;grid-row:2;}
+.tc-spc-btn{grid-column:2;grid-row:3;}
+
+/* Big HYPER bar beneath the diamond */
+.tc-hyper-btn{
+  width:252px;height:66px;margin-top:16px;
+  border-radius:33px;font-size:16px;letter-spacing:2px;
+  background:rgba(80,10,120,0.6);border-color:#cc44ff;
+  box-shadow:0 0 14px rgba(204,68,255,0.5);
+}
+.tc-hyper-btn:active,.tc-hyper-btn.tc-active{
+  background:rgba(204,68,255,0.55);border-color:#fff;box-shadow:0 0 22px #cc44ff;
+}
+
 #tc-pause{
   position:fixed;top:10px;right:10px;pointer-events:auto;touch-action:none;
   background:rgba(26,26,58,0.65);border:2px solid rgba(58,58,255,0.8);color:#fff;
@@ -1280,13 +1311,13 @@ canvas{display:block;image-rendering:pixelated;touch-action:none;}
       <div style="background:var(--panel);border:2px solid #ff3333;padding:12px 16px;flex:1;max-width:220px;">
         <div style="font-size:8px;color:#ff3333;margin-bottom:10px;text-align:center;">TOUCH</div>
         <div style="font-size:5px;line-height:2.4;color:var(--white);">
-          <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">MOVE</span><span>◀▶ PAD (left)</span></div>
-          <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">JUMP</span><span>▲ PAD (left)</span></div>
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">MOVE</span><span>D-PAD (left)</span></div>
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">JUMP</span><span style="color:var(--gold);">JMP (right)</span></div>
           <div style="border-top:1px solid #222;margin:4px 0;"></div>
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">ATTACK</span><span style="color:var(--gold);">ATK (right)</span></div>
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">BLOCK</span><span>BLK (right)</span></div>
           <div style="display:flex;justify-content:space-between;"><span style="color:var(--gray);">SPECIAL</span><span>SPC (right)</span></div>
-          <div style="display:flex;justify-content:space-between;"><span style="color:#cc44ff;">HYPER</span><span style="color:#cc44ff;">HYP (right)</span></div>
+          <div style="display:flex;justify-content:space-between;"><span style="color:#cc44ff;">HYPER</span><span style="color:#cc44ff;">HYPER!! bar</span></div>
         </div>
       </div>
     </div>
@@ -3764,11 +3795,11 @@ let tutFightPhaseDone = false;
 let tutFightPhaseLock = false; // brief lock after phase advances
 
 const TUT_FIGHT_PHASES = [
-  { task:'MOVE  ◀ ▶  close to Bruiser',     hint:'Arrow keys to move',                   check:(p1,p2)=>Math.abs((p1.x+p1.w/2)-(p2.x+p2.w/2))<160 },
-  { task:'JUMP! — Press UP arrow',           hint:'Up arrow to jump, press again mid-air for double jump', check:(p1)=>p1.jumps>0 },
-  { task:'ATTACK!  Press SPACE',             hint:'Get close and hit SPACE',               check:(p1,p2)=>p2.dmg>2 },
-  { task:'BLOCK! — Hold . (period)',          hint:'Hold . to block — Bruiser will punch you!', check:(p1)=>p1.blkTimer>0, cpuActive:true, forceAttack:true },
-  { task:'SPECIAL! — Press , (comma)',        hint:'Press comma to fire your special attack', check:(p1,p2,g)=>!!(g&&g._tutSpecialFired) },
+  { task:'MOVE with the D-PAD close to Bruiser', hint:'Left/right on the D-pad to move',       check:(p1,p2)=>Math.abs((p1.x+p1.w/2)-(p2.x+p2.w/2))<160 },
+  { task:'JUMP! — Tap JMP',                  hint:'Tap JMP to jump, tap again mid-air for double jump', check:(p1)=>p1.jumps>0 },
+  { task:'ATTACK!  Tap ATK',                 hint:'Get close and tap ATK',                 check:(p1,p2)=>p2.dmg>2 },
+  { task:'BLOCK! — Hold BLK',                hint:'Hold BLK — Bruiser will punch you!',    check:(p1)=>p1.blkTimer>0, cpuActive:true, forceAttack:true },
+  { task:'SPECIAL! — Tap SPC',               hint:'Tap SPC to fire your special attack',   check:(p1,p2,g)=>!!(g&&g._tutSpecialFired) },
   { task:'FREE FIGHT — knock Bruiser off!',  hint:'Full fight! Bruiser is now active.',    check:()=>false, cpuActive:true, free:true },
 ];
 
@@ -5168,7 +5199,8 @@ function drawBar(bx,by,bw,bh,p,col,flip){
   const dmgCol=pct>0.75?'#ff4444':pct>0.4?'#ffaa00':'#ffffff';
   // Damage % — unified 11px for both number and sign
   ctx.font='11px "Press Start 2P"';
-  ctx.fillStyle=dmgCol; ctx.textAlign=flip?'left':'right';
+  ctx.fillStyle=dmgCol; ctx.text
+Align=flip?'left':'right';
   if(flip){ ctx.fillText(Math.floor(p.dmg)+'%', bx+4, by+bh-2); }
   else     { ctx.fillText(Math.floor(p.dmg)+'%', bx+bw-4, by+bh-2); }
 
@@ -9926,22 +9958,25 @@ window.addEventListener('load',()=>{
 });
 </script>
 
-<!-- ══ MOBILE EDITION: ON-SCREEN TOUCH CONTROLS ══ -->
+<!-- MOBILE EDITION: ON-SCREEN TOUCH CONTROLS -->
 <div id="touch-controls" class="hidden">
   <div class="tc-zone tc-left">
     <div class="tc-dpad">
-      <div class="tc-btn tc-left-btn" data-key="ArrowLeft">&lt;</div>
-      <div class="tc-btn tc-right-btn" data-key="ArrowRight">&gt;</div>
-      <div class="tc-btn tc-up-btn" data-key="ArrowUp">JUMP</div>
+      <div class="tc-center-deco"></div>
+      <div class="tc-btn tc-up-btn" data-key="ArrowUp">&#9650;</div>
+      <div class="tc-btn tc-down-btn" data-key="ArrowDown">&#9660;</div>
+      <div class="tc-btn tc-left-btn" data-key="ArrowLeft">&#9664;</div>
+      <div class="tc-btn tc-right-btn" data-key="ArrowRight">&#9654;</div>
     </div>
   </div>
   <div class="tc-zone tc-right">
-    <div class="tc-actions">
-      <div class="tc-btn" data-key="Comma">SPC<span class="tc-key">,</span></div>
-      <div class="tc-btn" data-key="Space">ATK<span class="tc-key">SPACE</span></div>
-      <div class="tc-btn" data-key="Enter">HYP<span class="tc-key">ENTER</span></div>
-      <div class="tc-btn" data-key="Period">BLK<span class="tc-key">.</span></div>
+    <div class="tc-diamond">
+      <div class="tc-btn tc-jmp-btn" data-key="ArrowUp">JMP</div>
+      <div class="tc-btn tc-blk-btn" data-key="Period">BLK</div>
+      <div class="tc-btn tc-atk-btn" data-key="Space">ATK</div>
+      <div class="tc-btn tc-spc-btn" data-key="Comma">SPC</div>
     </div>
+    <div class="tc-btn tc-hyper-btn" data-key="Enter">HYPER!!</div>
   </div>
 </div>
 <div id="tc-pause" data-key="Escape">II PAUSE</div>
